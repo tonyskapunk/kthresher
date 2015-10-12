@@ -1,0 +1,8 @@
+Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: kthresher
+Upstream-Contact: Tony Garcia <tony.garcia at rackspace dot com>
+Source: https://github.com/rackerlabs/kthresher
+
+Files: *
+Copyright: 2015, Tony Garcia
+License: Apache-2.0

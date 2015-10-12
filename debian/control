@@ -1,0 +1,20 @@
+Source: kthresher
+Maintainer: Tony Garcia <tony.garcia@rackspace.com>
+Section: python
+Priority: optional
+Standards-Version: 1.2.2
+Build-Depends:
+ debhelper (>= 9),
+ dh-python,
+ python-all (>= 2.6.6-3),
+ python3-all
+X-Python-Version: >= 2.6
+
+Package: kthresher
+Architecture: all
+Depends:
+ ${misc:Depends},
+ ${python:Depends},
+ python-apt
+Description: Purge Unused Kernels
+ Tool to remove kernel image packages marked as candidates for autoremoval.
