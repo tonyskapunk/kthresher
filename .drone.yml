@@ -1,0 +1,18 @@
+build:
+  image: registry.pkgdev.rackspace.com/build-base:ubuntu-16.04
+  commands:
+    #install build-deps
+    - apt-get update
+    - echo yes | mk-build-deps --install --remove debian/control
+    #set up the upstream branch - has to be orphan so the git archive is pure.
+    - git archive v1.2.2 -o ../kthresher_1.2.2.orig.tar.gz
+    #execute the build
+    - debuild -us -uc
+    - cd ..
+    - export TIMESTAMP=1470843748
+    - ssh drop-point mkdir /drop-point/holland/
+    - scp -r ./*deb drop-point:/drop-point/holland//
+    - scp -r ./*changes drop-point:/drop-point/holland//
+    - scp -r ./*dsc drop-point:/drop-point/holland//
+    - scp -r ./*build drop-point:/drop-point/holland//
+
