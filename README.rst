@@ -15,7 +15,7 @@ kthresher
         :alt: License
 
 .. table:: kthresher logo
-   :widths: auto
+   :width: auto
    :align: center
 
    =======
