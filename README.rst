@@ -14,13 +14,7 @@ kthresher
         :target: https://raw.githubusercontent.com/rackerlabs/kthresher/master/LICENSE
         :alt: License
 
-.. table:: kthresher logo
-   :width: auto
-   :align: center
-
-   =======
-   |logo0|
-   =======
+|logo0|
 
 Tool to remove unused kernels that were installed automatically in Debian/Ubuntu.
 
@@ -360,10 +354,10 @@ The art was created by `Carlos Garcia <https://hellyeahdesign.com.mx>`__ <hellye
         :alt: License
 
 .. |logo0| image:: https://github.com/rackerlabs/kthresher/wiki/img/kthresher.png      
-        :width: 400
+           :width: 600
 .. |logo1| image:: https://github.com/rackerlabs/kthresher/wiki/img/kthresher_horiz.png
-        :width: 400
+           :width: 400
 .. |logo2| image:: https://github.com/rackerlabs/kthresher/wiki/img/kthresher_circ.png
-        :width: 400
+           :width: 400
 .. |logo3| image:: https://github.com/rackerlabs/kthresher/wiki/img/kthresher_half.png
-        :width: 400
+           :width: 400
