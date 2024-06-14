@@ -354,7 +354,7 @@ The art was created by `Carlos Garcia <https://hellyeahdesign.com.mx>`__ <hellye
         :alt: License
 
 .. |logo0| image:: https://github.com/rackerlabs/kthresher/wiki/img/kthresher.png      
-           :width: 600
+           :width: 400
 .. |logo1| image:: https://github.com/rackerlabs/kthresher/wiki/img/kthresher_horiz.png
            :width: 400
 .. |logo2| image:: https://github.com/rackerlabs/kthresher/wiki/img/kthresher_circ.png
