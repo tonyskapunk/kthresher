@@ -1,23 +1,20 @@
-|logo0|
-
 kthresher
 =========
 
 .. image:: https://img.shields.io/github/release/rackerlabs/kthresher.svg
         :target: https://github.com/rackerlabs/kthresher/releases/latest
         :alt: Github release
-.. image:: https://img.shields.io/travis/rackerlabs/kthresher/master.svg?logo=travis&label=master
-        :target: https://travis-ci.org/rackerlabs/kthresher
-        :alt: Build Master Status
-.. image:: https://img.shields.io/travis/rackerlabs/kthresher/master.svg?logo=travis&label=development
-        :target: https://travis-ci.org/rackerlabs/kthresher
+.. image:: https://github.com/rackerlabs/kthresher/actions/workflows/test.yml/badge.svg?branch=master
+        :target: https://github.com/kthresher/kthresher/actions/workflows/test.yml
+        :alt: Build Main Status
+.. image:: https://github.com/rackerlabs/kthresher/actions/workflows/test.yml/badge.svg?branch=development
+        :target: https://github.com/kthresher/kthresher/actions/workflows/test.yml
         :alt: Build Development Status
 .. image:: https://img.shields.io/github/license/rackerlabs/kthresher.svg
         :target: https://raw.githubusercontent.com/rackerlabs/kthresher/master/LICENSE
         :alt: License
-.. image:: https://img.shields.io/twitter/url/https/github.com/rackerlabs/kthresher.svg?style=social
-        :target: https://twitter.com/intent/tweet?text=Check%20this%20out:&url=https%3A%2F%2Fgithub.com%2Frackerlabs%2Fkthresher
-        :alt: Twitter
+
+|logo0|
 
 Tool to remove unused kernels that were installed automatically in Debian/Ubuntu.
 
@@ -76,17 +73,16 @@ All the scripts found by *run-parts* are executed on post install of the kernel 
 
 The first script *"apt-auto-removal"* takes care of adding a configuration in /etc/apt/apt.conf.d/01autoremove-kernels this script generates that list based on the logic described above, it means that the NeverAutoRemove may have anything between two to three kernels listed.
 
-Supported Operating Systems
+Supported Linux Distros
 ---------------------------
 
 * Debian (Tested on Version(s))
-    * `8 <https://www.debian.org/releases/jessie/>`__
-    * `9 <https://www.debian.org/releases/stretch/>`__
-* Ubuntu (Tested on Version(s))
-    * `12.04 <http://releases.ubuntu.com/precise/>`__
-    * `14.04 <http://releases.ubuntu.com/trusty/>`__
-    * `16.04 <http://releases.ubuntu.com/xenial/>`__
-    * `17.10 <http://releases.ubuntu.com/artful/>`__
+    * `11 <https://www.debian.org/releases/bullseye/>`__
+    * `12 <https://www.debian.org/releases/bookworm/>`__
+* Ubuntu LTS (Tested on Version(s))
+    * `20.04 <http://releases.ubuntu.com/focal/>`__
+    * `22.04 <http://releases.ubuntu.com/jammy/>`__
+    * `24.04 <http://releases.ubuntu.com/noble/>`__
 
 
 Installation
@@ -118,7 +114,7 @@ Github
 .. code-block:: bash
 
     git clone https://github.com/rackerlabs/kthresher.git
-    cd kthresher && python setup.py install
+    cd kthresher && python -m pip install .
 
 
 Usage
@@ -319,79 +315,6 @@ Dry run including headers
     INFO:           Purging: linux-headers-3.13.0-85-generic
 
 
-Testing
--------
-
-The below code can be used to install up to a fixed amount of kernels and headers if available of the form "linux-(image|headers)-[0-9].*-(generic|amd64)" at the end it should end up with two or three kernels in the NeverAutoRemove list, including the latest, the prior to latest and the running kernel.
-
-.. code-block:: python
-
-    #!/usr/bin/env python
-    '''Installs available linux-image-* and linux-headers-*
-    And set them for autoremoval, so kthresher can be used for testing.
-    '''
-    
-    import re
-    import apt
-    import sys
-    from platform import uname
-    
-    def autorm_install(pkgs):
-        '''Install a list of packages and set them autoremovable.
-        '''
-        latest_kernel = ''
-        ac = apt.Cache()
-        for pkg in pkgs:
-            latest_kernel = pkg
-            k = ac[pkg]
-            if not k.is_installed:
-                k.mark_install(from_user=False)
-        try:
-            ac.commit(install_progress=None)
-        except apt.cache.LockFailedException as lfe:
-            print('{}, are you root?'.format(lfe))
-            sys.exit(1)
-        except SystemError:
-            print('Something failed')
-            sys.exit(1)
-    
-    def get_pkg(regex):
-        '''Get a list of packages available that match the regex.
-        '''
-        pkgs = []
-        ac = apt.Cache()
-        ac.update()
-        for pkg in ac:
-            if re.match(regex, pkg.name):
-                # ignore running kernel
-                if pkg.name == 'linux-image-{0}'.format(uname()[2]):
-                    continue
-                pkgs.append(pkg.name)
-        return pkgs
-    
-    def main():
-        limit = 5
-        if len(sys.argv) > 1:
-            try:
-                limit = int(sys.argv[1])
-            except:
-                print("Use an integer as the limit of pkgs to install.")
-                sys.exit(1)
-        print("Installing {} kernels/headers if available...".format(limit))
-        kernel_regex = "^linux-image-\d\..*-(generic|amd64)$"
-        header_regex = "^linux-headers-\d\..*-(generic|amd64)$"
-        kernels = get_pkg(kernel_regex)
-        headers = get_pkg(header_regex)
-        pkgs = kernels[0:limit] + headers[0:limit]
-        print("Installing {} packages total\n\tkernels: {}\n\theaders: {}"
-              .format(len(pkgs), kernels[0:limit], headers[0:limit]))
-        autorm_install(pkgs)
-
-    if __name__ == "__main__":
-        main()
-
-
-
 Bugs
 ----
 
@@ -431,9 +354,10 @@ The art was created by `Carlos Garcia <https://hellyeahdesign.com.mx>`__ <hellye
         :alt: License
 
 .. |logo0| image:: https://github.com/rackerlabs/kthresher/wiki/img/kthresher.png      
-
+           :width: 400
 .. |logo1| image:: https://github.com/rackerlabs/kthresher/wiki/img/kthresher_horiz.png
-
+           :width: 400
 .. |logo2| image:: https://github.com/rackerlabs/kthresher/wiki/img/kthresher_circ.png
-
+           :width: 400
 .. |logo3| image:: https://github.com/rackerlabs/kthresher/wiki/img/kthresher_half.png
+           :width: 400
