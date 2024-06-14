@@ -14,9 +14,13 @@ kthresher
         :target: https://raw.githubusercontent.com/rackerlabs/kthresher/master/LICENSE
         :alt: License
 
-+---------+
-| |logo0| |
-+---------+
+.. table:: kthresher logo
+   :widths: auto
+   :align: center
+
+   =======
+   |logo0|
+   =======
 
 Tool to remove unused kernels that were installed automatically in Debian/Ubuntu.
 
