@@ -1,7 +1,3 @@
-+---------+
-| |logo0| |
-+---------+
-
 kthresher
 =========
 
@@ -17,12 +13,10 @@ kthresher
 .. image:: https://img.shields.io/github/license/rackerlabs/kthresher.svg
         :target: https://raw.githubusercontent.com/rackerlabs/kthresher/master/LICENSE
         :alt: License
-.. image:: https://img.shields.io/twitter/url/https/github.com/rackerlabs/kthresher.svg?style=social
-        :target: https://twitter.com/intent/tweet?text=Check%20this%20out:&url=https%3A%2F%2Fgithub.com%2Frackerlabs%2Fkthresher
-        :alt: Twitter
-.. image:: https://img.shields.io/badge/Linux_Unplugged-566-blue?logo=PodcastIndex&logoColor=blue
-        :target: https://www.jupiterbroadcasting.com/show/linux-unplugged/566/
 
++---------+
+| |logo0| |
++---------+
 
 Tool to remove unused kernels that were installed automatically in Debian/Ubuntu.
 
